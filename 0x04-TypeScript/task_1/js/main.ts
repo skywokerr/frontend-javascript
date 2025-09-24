@@ -13,6 +13,16 @@ interface Directors extends Teacher {
   numberOfReports: number;
 }
 
+// Interface for the printTeacher function
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// Implement the printTeacher function
+const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
+  return `${firstName.charAt(0)}. ${lastName}`;
+};
+
 // Create teacher3 instance as per the example
 const teacher3: Teacher = {
   firstName: 'John',
@@ -34,6 +44,11 @@ const director1: Directors = {
 };
 
 console.log(director1);
+
+// Test the printTeacher function
+console.log('printTeacher("John", "Doe"):', printTeacher("John", "Doe"));
+console.log('printTeacher("Alice", "Smith"):', printTeacher("Alice", "Smith"));
+console.log('printTeacher("Bob", "Johnson"):', printTeacher("Bob", "Johnson"));
 
 // Additional examples to demonstrate the interface properties
 const teacher1: Teacher = {
@@ -80,6 +95,10 @@ console.log('Teacher 2:', teacher2);
 console.log('Director 2:', director2);
 console.log('Director 3:', director3);
 
+// More printTeacher examples using the existing objects
+console.log('Teacher 1 formatted:', printTeacher(teacher1.firstName, teacher1.lastName));
+console.log('Director 1 formatted:', printTeacher(director1.firstName, director1.lastName));
+
 // This would cause a TypeScript error (missing required property)
 // const invalidDirector: Directors = {
 //   firstName: 'Invalid',
@@ -88,3 +107,7 @@ console.log('Director 3:', director3);
 //   location: 'Somewhere'
 //   // Missing numberOfReports - Error: Property 'numberOfReports' is missing
 // };
+
+// This would cause a TypeScript error (wrong function signature)
+// const invalidPrintTeacher: printTeacherFunction = (firstName: string) => firstName;
+// Error: Type '(firstName: string) => string' is not assignable to type 'printTeacherFunction'
